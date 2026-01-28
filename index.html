@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ADD THIS! -->
+    <title>Fluffin Pastry Shop</title>
+
+    <!-- Cute Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+      header h1 {
+        font-family: "Fredoka", cursive;
+        font-size: 38px;
+        color: #4e342e;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Fluffin</h1>
+      <nav>
+        <span style="font-weight: 600; color: #4e342e; font-size: 14px">
+          Made by BSIT 3rd Year Marvin P. Cadorna :D
+        </span>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-text">
+        <h2>Delicious pastries for your warm moments</h2>
+        <p>
+          We bake with love and attention to detail to make every celebration
+          sweeter.
+        </p>
+        <a href="login.html" class="btn">Order Now</a>
+        <a href="menu.html" class="btn btn-menu">View Menu</a>
+      </div>
+
+      <div class="hero-img">
+        <img id="hero-slide" src="san.png" alt="Cake" />
+      </div>
+    </section>
+
+    <section class="best-sellers">
+      <h2 class="best-sellers-title">Our Best Sellers Now</h2>
+      <p class="best-sellers-text">
+        Treat yourself with our most loved cakes – baked fresh for your sweetest
+        moments.
+      </p>
+    </section>
+
+    <section class="cards-row">
+      <div class="card">
+        <img src="san.png" alt="Cake 1" />
+        <div class="card-content">
+          <h2>Croissant</h2>
+          <p>
+            Delicious Flaky, buttery pastry with a light, airy texture
+            croissant.
+          </p>
+          <a href="order.html" class="btn order-btn">Order Now</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="cake.png" alt="Cake 2" />
+        <div class="card-content">
+          <h2>PanCake</h2>
+          <p>
+            Soft vanilla pancake with a hint of almond flavor, perfect for
+            birthdays.
+          </p>
+          <a href="order.html" class="btn order-btn">Order Now</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="banana.png" alt="Cake 2" />
+        <div class="card-content">
+          <h2>Cake</h2>
+          <p>
+            Soft and moist cake offering a perfect balance of sweetness and
+            texture.
+          </p>
+          <a href="order.html" class="btn order-btn">Order Now</a>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const images = ["san.png", "cake.png", "banana.png"];
+      let current = 0;
+      const imgTag = document.getElementById("hero-slide");
+      const fadeDuration = 1000;
+
+      function fadeToNextImage() {
+        imgTag.style.opacity = 0;
+        setTimeout(() => {
+          current = (current + 1) % images.length;
+          imgTag.src = images[current];
+          imgTag.style.opacity = 1;
+        }, fadeDuration);
+      }
+      setInterval(fadeToNextImage, 3000);
+
+      const animatedElements = new Set();
+
+      window.addEventListener("scroll", () => {
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        const screenHeight = window.innerHeight;
+
+        document.querySelectorAll(".card").forEach((card) => {
+          if (!animatedElements.has(card)) {
+            const cardTop = card.getBoundingClientRect().top;
+
+            if (cardTop < screenHeight - 100) {
+              card.classList.add("visible");
+              animatedElements.add(card);
+            }
+          }
+        });
+
+        const bestEls = [
+          document.querySelector(".best-sellers-title"),
+          document.querySelector(".best-sellers-text"),
+        ];
+
+        bestEls.forEach((el) => {
+          if (!animatedElements.has(el)) {
+            const elTop = el.getBoundingClientRect().top;
+
+            if (elTop < screenHeight - 100) {
+              el.classList.add("visible");
+              animatedElements.add(el);
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
